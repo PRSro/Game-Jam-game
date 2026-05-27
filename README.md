@@ -1,6 +1,6 @@
 # Shadow Empire: 1800
 
-> A game jam entry by [PRSro](https://github.com/PRSro) and [CodeMathe](https://github.com/CodeMathe) — built
+> A game jam entry by [PRSro](https://github.com/PRSro) and [CodeMathe](https://github.com/CodeMathe)
 
 ---
 
@@ -14,7 +14,7 @@
 
 ```
 Shadow Empire: 1800/    # Main game project
-.gitignore              # Ignores AI agent directories (.codex, .claude, .agents)
+.gitignore              # Ignores AI agent directories
 .gitattributes          # Git line ending configuration
 ```
 
