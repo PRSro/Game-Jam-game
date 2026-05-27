@@ -1,6 +1,6 @@
 # Shadow Empire: 1800
 
-> A game jam entry by [PRSro](https://github.com/PRSro) — built under Obscuron
+> A game jam entry by [PRSro](https://github.com/PRSro) and [CodeMathe](https://github.com/CodeMathe) — built
 
 ---
 
