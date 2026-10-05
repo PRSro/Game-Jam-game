@@ -63,8 +63,11 @@ const categoryLabel = computed(() => {
             class="flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400"
             title="Afacere verificată Piața"
           >
-            <svg class="h-3 w-3 fill-current" viewBox="0 0 24 24">
-              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            <svg
+              class="h-3 w-3 fill-current"
+              viewBox="0 0 24 24"
+            >
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
             </svg>
             <span>Verificat</span>
           </span>
@@ -78,11 +81,20 @@ const categoryLabel = computed(() => {
       <!-- Title & Address -->
       <div>
         <h3 class="text-lg font-bold text-text">
-          {{ name }}
+          <RouterLink
+            :to="`/afaceri/${business.id}`"
+            class="hover:text-action hover:underline"
+          >
+            {{ name }}
+          </RouterLink>
         </h3>
         <p class="mt-1 flex items-center gap-1 text-xs text-text-muted">
-          <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          <svg
+            class="h-3.5 w-3.5 shrink-0"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
           </svg>
           <span>{{ address }}</span>
         </p>
@@ -129,7 +141,8 @@ const categoryLabel = computed(() => {
       </div>
 
       <RouterLink
-        to="/evenimente"
+        id="business-card-details-link"
+        :to="`/afaceri/${business.id}`"
         class="font-semibold text-action hover:underline"
       >
         {{ locale === 'en' ? 'View details →' : 'Vezi detalii →' }}

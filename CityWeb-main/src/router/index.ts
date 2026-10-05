@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import("../pages/BusinessesPage.vue"),
     },
     {
+      path: "/afaceri/:id",
+      name: "afaceri-detail",
+      component: () => import("../pages/BusinessDetailPage.vue"),
+    },
+    {
       path: "/calendar",
       name: "calendar",
       component: () => import("../pages/CalendarPage.vue"),

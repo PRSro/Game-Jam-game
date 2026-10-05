@@ -18,6 +18,10 @@ export interface Business {
   localizedDescription?: string
   tags: string[]
   verified: boolean
+  // Contact & Social Links (UNVERIFIED demo metadata)
+  facebookUrl?: string
+  websiteUrl?: string
+  phone?: string
   // Graph Relations (Outgoing Links)
   connectedEvents: string[] // Event.id[]
   connectedJobs: string[]   // JobAd.id[]

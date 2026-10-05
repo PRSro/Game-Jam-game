@@ -99,6 +99,9 @@ export interface Business {
   localizedDescription?: string;
   tags: string[];
   verified: boolean;
+  facebookUrl?: string;
+  websiteUrl?: string;
+  phone?: string;
   connectedEvents: string[];
   connectedJobs: string[];
   connectedPolls: string[];
@@ -313,6 +316,9 @@ export const businesses: Business[] = [
     localizedDescription: "Artisanal coffee roastery and community coworking space.",
     tags: ["cafe", "coworking", "specialty", "wifi"],
     verified: true,
+    facebookUrl: "https://facebook.com/floreascacoffee.demo",
+    websiteUrl: "https://floreascacoffee.ro.demo",
+    phone: "+40 721 000 111",
     connectedEvents: ["event-1"],
     connectedJobs: ["job-1"],
     connectedPolls: ["poll-1"],
@@ -328,6 +334,9 @@ export const businesses: Business[] = [
     localizedDescription: "Neighborhood bookstore hosting book clubs and local author launches.",
     tags: ["cărți", "cultură", "evenimente", "centru"],
     verified: true,
+    facebookUrl: "https://facebook.com/librariacentru.demo",
+    websiteUrl: "https://librariacentru.ro.demo",
+    phone: "+40 722 000 222",
     connectedEvents: [],
     connectedJobs: ["job-2"],
     connectedPolls: [],
@@ -343,6 +352,8 @@ export const businesses: Business[] = [
     localizedDescription: "Sourdough bread and artisan pastries from a local family bakery.",
     tags: ["brutărie", "bio", "maia", "local"],
     verified: true,
+    facebookUrl: "https://facebook.com/brutariadrumultaberei.demo",
+    phone: "+40 723 000 333",
     connectedEvents: ["event-3"],
     connectedJobs: ["job-3"],
     connectedPolls: ["poll-2"],
@@ -358,8 +369,44 @@ export const businesses: Business[] = [
     localizedDescription: "Startup incubator, tech workshops, and urban hackathons.",
     tags: ["tech", "startup", "incubator", "networking"],
     verified: true,
+    facebookUrl: "https://facebook.com/romexpohub.demo",
+    websiteUrl: "https://romexpohub.ro.demo",
+    phone: "+40 724 000 444",
     connectedEvents: ["event-2"],
     connectedJobs: [],
     connectedPolls: [],
+  },
+  {
+    id: "biz-5",
+    name: "Bistro Teatral Calea Victoriei",
+    localizedName: "Calea Victoriei Theater Bistro",
+    neighborhood: "old-town",
+    category: "bistro",
+    address: "Calea Victoriei nr. 120, București",
+    description: "Bistro urban gastronomic și terasă cu muzică acustică live.",
+    localizedDescription: "Urban gastronomic bistro and terrace with live acoustic music.",
+    tags: ["bistro", "victoriei", "mâncare", "terasa"],
+    verified: true,
+    facebookUrl: "https://facebook.com/bistrovictoriei.demo",
+    phone: "+40 725 000 555",
+    connectedEvents: ["event-1"],
+    connectedJobs: [],
+    connectedPolls: [],
+  },
+  {
+    id: "biz-6",
+    name: "Ceainărie de Cartier Floreasca",
+    localizedName: "Floreasca Neighborhood Teahouse",
+    neighborhood: "floreasca",
+    category: "cafe",
+    address: "Str. Tudor Ștefan nr. 8, București",
+    description: "Grădină liniștită de ceai, selecție de infuzii organice și jocuri de societate.",
+    localizedDescription: "Quiet tea garden, organic infusion selection, and board games.",
+    tags: ["ceainarie", "gradina", "relaxare", "floreasca"],
+    verified: true,
+    facebookUrl: "https://facebook.com/ceainariafloreasca.demo",
+    connectedEvents: [],
+    connectedJobs: [],
+    connectedPolls: ["poll-1"],
   },
 ];
