@@ -7,6 +7,7 @@ const route = useRoute();
 
 const links = [
   { to: "/evenimente", key: "nav.events" },
+  { to: "/afaceri", key: "nav.businesses" },
   { to: "/calendar", key: "nav.calendar" },
   { to: "/harta", key: "nav.harta" },
 ];

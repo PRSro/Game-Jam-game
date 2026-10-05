@@ -87,6 +87,23 @@ export interface TrafficDisruption {
   affectedCommutes: string[];
 }
 
+export interface Business {
+  id: string;
+  name: string;
+  localizedName?: string;
+  neighborhood: string;
+  category: "cafe" | "bookstore" | "bakery" | "tech-hub" | "bistro" | "services";
+  address: string;
+  localizedAddress?: string;
+  description: string;
+  localizedDescription?: string;
+  tags: string[];
+  verified: boolean;
+  connectedEvents: string[];
+  connectedJobs: string[];
+  connectedPolls: string[];
+}
+
 export interface Persona {
   id: string;
   neighborhood: string;
@@ -283,3 +300,66 @@ export const persona: Persona = {
   cityPassport: ["floreasca", "old-town"],
   reputation: 7,
 };
+
+export const businesses: Business[] = [
+  {
+    id: "biz-1",
+    name: "Cafenea de Specialitate Floreasca",
+    localizedName: "Floreasca Specialty Coffee",
+    neighborhood: "floreasca",
+    category: "cafe",
+    address: "Calea Floreasca nr. 42, București",
+    description: "Prăjitorie meșteșugărească de cafea și spațiu de coworking comunitar.",
+    localizedDescription: "Artisanal coffee roastery and community coworking space.",
+    tags: ["cafe", "coworking", "specialty", "wifi"],
+    verified: true,
+    connectedEvents: ["event-1"],
+    connectedJobs: ["job-1"],
+    connectedPolls: ["poll-1"],
+  },
+  {
+    id: "biz-2",
+    name: "Librăria Independentă Centru",
+    localizedName: "Old Town Independent Books",
+    neighborhood: "old-town",
+    category: "bookstore",
+    address: "Str. Lipscani nr. 15, București",
+    description: "Librărie de cartier cu club de carte și lansări de autori locali.",
+    localizedDescription: "Neighborhood bookstore hosting book clubs and local author launches.",
+    tags: ["cărți", "cultură", "evenimente", "centru"],
+    verified: true,
+    connectedEvents: [],
+    connectedJobs: ["job-2"],
+    connectedPolls: [],
+  },
+  {
+    id: "biz-3",
+    name: "Brutaria Meșteșugărească Drumul Taberei",
+    localizedName: "Drumul Taberei Artisan Bakery",
+    neighborhood: "drumul-taberei",
+    category: "bakery",
+    address: "Bulevardul Drumul Taberei nr. 88, București",
+    description: "Pâine cu maia și patiserie artizanală dintr-un atelier de familie.",
+    localizedDescription: "Sourdough bread and artisan pastries from a local family bakery.",
+    tags: ["brutărie", "bio", "maia", "local"],
+    verified: true,
+    connectedEvents: ["event-3"],
+    connectedJobs: ["job-3"],
+    connectedPolls: ["poll-2"],
+  },
+  {
+    id: "biz-4",
+    name: "Hub de Inovare Romexpo",
+    localizedName: "Romexpo Innovation Hub",
+    neighborhood: "romexpo",
+    category: "tech-hub",
+    address: "Bulevardul Mărăști nr. 65, București",
+    description: "Spațiu pentru startup-uri, workshop-uri tehnice și hackathoane urbanistic.",
+    localizedDescription: "Startup incubator, tech workshops, and urban hackathons.",
+    tags: ["tech", "startup", "incubator", "networking"],
+    verified: true,
+    connectedEvents: ["event-2"],
+    connectedJobs: [],
+    connectedPolls: [],
+  },
+];

@@ -12,7 +12,9 @@ async function mountNav() {
     history: createMemoryHistory(),
     routes: [
       { path: "/evenimente", component: stub },
+      { path: "/afaceri", component: stub },
       { path: "/calendar", component: stub },
+      { path: "/harta", component: stub },
     ],
   });
   await router.push("/evenimente");
@@ -28,21 +30,22 @@ describe("NavBar", () => {
     const { wrapper } = await mountNav();
     const links = wrapper.findAll("a");
 
-    expect(links).toHaveLength(3);
+    expect(links).toHaveLength(4);
     expect(links[0].attributes("href")).toBe("/evenimente");
     expect(links[0].text()).toBe("Evenimente");
-    expect(links[1].attributes("href")).toBe("/calendar");
-    expect(links[2].attributes("href")).toBe("/harta");
+    expect(links[1].attributes("href")).toBe("/afaceri");
+    expect(links[2].attributes("href")).toBe("/calendar");
+    expect(links[3].attributes("href")).toBe("/harta");
   });
 
   it("marks the active route with aria-current", async () => {
     const { wrapper, router } = await mountNav();
 
     expect(wrapper.findAll("a")[0].attributes("aria-current")).toBe("page");
-    expect(wrapper.findAll("a")[1].attributes("aria-current")).toBeUndefined();
+    expect(wrapper.findAll("a")[2].attributes("aria-current")).toBeUndefined();
 
     await router.push("/calendar");
-    expect(wrapper.findAll("a")[1].attributes("aria-current")).toBe("page");
+    expect(wrapper.findAll("a")[2].attributes("aria-current")).toBe("page");
   });
 
   it("switches locale from the nav", async () => {

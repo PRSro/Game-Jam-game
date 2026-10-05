@@ -17,6 +17,7 @@ const ro: Record<string, MessageValue> = {
   "nav.events": "Evenimente",
   "nav.calendar": "Calendar",
   "nav.harta": "Harta",
+  "nav.businesses": "Afaceri Locale",
   "nav.locale": "Limba",
 
   "calendar.toggle": "Calendarul evenimentelor",
@@ -94,6 +95,7 @@ const en: Record<string, MessageValue> = {
   "nav.events": "Events",
   "nav.calendar": "Calendar",
   "nav.harta": "Map",
+  "nav.businesses": "Local Businesses",
   "nav.locale": "Language",
 
   "calendar.toggle": "Event calendar",
