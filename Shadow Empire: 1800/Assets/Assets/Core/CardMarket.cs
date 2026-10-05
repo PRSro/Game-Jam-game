@@ -5,6 +5,8 @@ public static class CardMarket
 {
     static List<CardMarketEntry> listings = new List<CardMarketEntry>();
 
+    public static void Reset() { listings.Clear(); }
+
     public static List<CardMarketEntry> GetListings() => listings;
 
     public static void Refresh(GameManager gm)

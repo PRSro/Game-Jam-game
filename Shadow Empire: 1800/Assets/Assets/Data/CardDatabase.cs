@@ -47,12 +47,12 @@ public static class CardDatabase
     {
         CardData card = ScriptableObject.CreateInstance<CardData>();
         card.cardId = _nextCardId++;
-        if (_nextCardId > 24)
+        if (_nextCardId > 36)
         {
-            Debug.LogWarning($"CardDatabase: _nextCardId exceeded 24 ({_nextCardId}). Cards with id >= 24 will use placeholder art.");
+            Debug.LogWarning($"CardDatabase: _nextCardId exceeded 36 ({_nextCardId}). Cards with id > 36 will use placeholder art.");
         }
-        // Stable art key: "card" + (cardId + 1) maps runtime 0-based ID to asset names card1..card24.
-        // IDs 0-23 map to the existing card1.png-card24.png assets.
+        // Stable art key: "card" + (cardId + 1) maps runtime 0-based ID to asset names card1..card36.
+        // IDs 0-35 map to card1.png-card36.png. Only card1.png-card24.png exist; >=25 use placeholder art.
         card.artKey = $"card{card.cardId + 1}";
         card.cardName = name;
         card.description = desc;
@@ -129,5 +129,10 @@ public static class CardDatabase
     public static List<CardData> GetLegendaryCards()
     {
         return GetAllCards().FindAll(c => c.rarity == CardRarity.LEGENDARY);
+    }
+
+    public static CardData GetCardById(int cardId)
+    {
+        return GetAllCards().Find(c => c.cardId == cardId);
     }
 }

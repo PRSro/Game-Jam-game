@@ -5,6 +5,8 @@ public static class ProvinceDatabase
 {
     private static List<ProvinceData> provinces = null;
 
+    public static void Reset() { provinces = null; }
+
     /// <summary>Returns all provinces in the database.</summary>
     public static List<ProvinceData> GetAllProvinces()
     {

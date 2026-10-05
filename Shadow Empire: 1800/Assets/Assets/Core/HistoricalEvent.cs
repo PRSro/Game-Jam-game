@@ -421,6 +421,14 @@ public static class HistoricalEventManager
         activeEvent = null;
     }
 
+    public static void RebuildActiveEvent(string eventName)
+    {
+        EnsurePool();
+        activeEvent = eventPool.Find(e => e.eventName == eventName);
+        if (activeEvent == null)
+            Debug.LogWarning($"[HistoricalEventManager] Could not find event '{eventName}' to restore.");
+    }
+
     public static void ClearActiveEvent(GameManager gm)
     {
         if (activeEvent != null)

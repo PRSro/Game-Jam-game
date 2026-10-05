@@ -176,6 +176,31 @@ public static class TurnActionController
                grandLodgeLinks[factionId].Contains(LodgeKey(a, b));
     }
 
+    public static List<string> GetAllLinks()
+    {
+        var result = new List<string>();
+        foreach (var kvp in grandLodgeLinks)
+            foreach (string link in kvp.Value)
+                result.Add($"{kvp.Key}:{link}");
+        return result;
+    }
+
+    public static void LoadLinks(List<string> links)
+    {
+        grandLodgeLinks.Clear();
+        if (links == null) return;
+        foreach (string entry in links)
+        {
+            int colon = entry.IndexOf(':');
+            if (colon < 0) continue;
+            int factionId = int.Parse(entry.Substring(0, colon));
+            string link = entry.Substring(colon + 1);
+            if (!grandLodgeLinks.ContainsKey(factionId))
+                grandLodgeLinks[factionId] = new List<string>();
+            grandLodgeLinks[factionId].Add(link);
+        }
+    }
+
     static bool CanUseUniqueAction(FactionData faction, int requiredFactionId, GameManager gm)
     {
         if (gm == null || faction == null || faction.isEliminated) return false;

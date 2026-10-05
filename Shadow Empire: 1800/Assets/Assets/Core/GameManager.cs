@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     public List<FactionData> factions = new List<FactionData>();
 
-    Queue<PlayedCard> resolutionQueue = new Queue<PlayedCard>();
+    System.Collections.Generic.Queue<PlayedCard> resolutionQueue = new System.Collections.Generic.Queue<PlayedCard>();
     public const int MAX_CARDS_PER_TURN = 2;
     List<CardData> playerCardsThisResolution = new List<CardData>();
     public List<CardData> allCardsThisResolution = new List<CardData>();
@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour
     public System.Action OnMarketRefresh;
     public System.Action<FactionData> OnGoldChanged;
     public const float PHASE_TIME_LIMIT = 300f;
-    public const float FORTIFY_TIME_LIMIT = 20f;
+    public const float ATTACK_TIME_LIMIT = 60f;
+    public const float FORTIFY_TIME_LIMIT = 60f;
     Coroutine phaseTimerCoroutine;
     bool isResolutionRunning = false;
     Dictionary<string, int> comboPowerBoost = new Dictionary<string, int>();
@@ -269,7 +270,7 @@ public class GameManager : MonoBehaviour
         }
 
         FactionData player = factions[playerFactionId];
-        if (!player.isEliminated)
+        if (!player.isEliminated && player.pendingReinforcements > 0)
         {
             OnReinforcementPhase?.Invoke(player.pendingReinforcements);
             IsWaitingForReinforcements = true;
@@ -443,10 +444,19 @@ public class GameManager : MonoBehaviour
 
     public void PlayCard(CardData card, FactionData target)
     {
-        TurnActionController.PlayCard(factions[playerFactionId], card, target);
+        bool played = TurnActionController.PlayCard(factions[playerFactionId], card, target);
 
         if (GameUIManager.Instance != null)
             GameUIManager.Instance.UpdatePlayerHand(factions[playerFactionId].hand);
+
+        if (played)
+        {
+            LogMessage($"{card.cardName} played successfully.");
+        }
+        else
+        {
+            LogMessage($"Could not play {card?.cardName ?? "card"} — check game state and card limits.");
+        }
 
         if (!CanPlayMoreCards())
             LogMessage($"You've played the maximum of {MAX_CARDS_PER_TURN} cards this turn.");
@@ -523,7 +533,7 @@ public class GameManager : MonoBehaviour
             pendingAttackTarget = null;
 
             float elapsed = 0f;
-            while (IsWaitingForAttackSelection && elapsed < PHASE_TIME_LIMIT)
+            while (IsWaitingForAttackSelection && elapsed < ATTACK_TIME_LIMIT)
             {
                 elapsed += Time.deltaTime;
                 yield return null;
@@ -1057,6 +1067,11 @@ public class GameManager : MonoBehaviour
         ProvinceGraph.ClearCache();
         TerritoryGraphRenderer.ClearPositions();
         TerritoryDatabase.Reset();
+        ProvinceDatabase.Reset();
+        CardMarket.Reset();
+        HistoricalEventManager.Reset();
+        TurnActionController.ResetUniqueActionState();
+        GameUIManager.ResetStaticState();
         territories = TerritoryDatabase.GetAllTerritories();
         OnYearChanged?.Invoke(CurrentYear);
 
@@ -1351,6 +1366,28 @@ public class GameManager : MonoBehaviour
     public bool AreTerritoriesConnected(TerritoryData a, TerritoryData b, int factionId)
     {
         return IsConnectedThroughFriendlyTerritories(a, b, factionId);
+    }
+
+    public List<PlayedCard> GetResolutionQueueCopy()
+    {
+        return resolutionQueue.ToList();
+    }
+
+    public void ClearAndSetResolutionQueue(List<PlayedCard> cards)
+    {
+        resolutionQueue.Clear();
+        foreach (var c in cards)
+            resolutionQueue.Enqueue(c);
+    }
+
+    public void SaveGame(string slotName)
+    {
+        SaveSystem.SaveGame(slotName);
+    }
+
+    public bool LoadGame(string slotName)
+    {
+        return SaveSystem.LoadGame(slotName);
     }
 }
 
