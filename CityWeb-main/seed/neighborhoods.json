@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Floreasca",
+    "sector": "2",
+    "description": "DEMO DATA - Placeholder neighborhood",
+    "stats": { "population": 0 }
+  },
+  {
+    "name": "Centru",
+    "sector": "3",
+    "description": "DEMO DATA - Placeholder neighborhood",
+    "stats": { "population": 0 }
+  }
+]

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // ---------- Models ----------
+  // Intentionally unset. Global config pins a small local Ollama model for
+  // routine work; pinning it here too would cap every session in this repo.
+  // Pick per-session with /models.
+  // "model": "opencode/big-pickle",
+  // "small_model": "opencode/nemotron-3.5-lightning-free",
+
+  "autoupdate": "notify",
+  "share": "disabled",
+
+  // ---------- Plugins ----------
+  // VERIFY each npm package name and PIN a version before installing (e.g. "pkg@1.2.3").
+  // oh-my-opencode-slim was replaced by oh-my-openagent (OhMyOpenCode): two
+  // orchestrator plugins in one session fight over agent routing.
+  "plugin": [
+    "@tarquinen/opencode-dcp",
+    "opencode-mem",
+    "cc-safety-net",
+    "opencode-snip@1.6.1",
+    "opencode-caveman",
+    "oh-my-openagent",
+    "opencode-usage-plugin@0.0.1"
+  ],
+
+  // ---------- Instructions (loaded every session, keep SHORT) ----------
+  // AGENTS.md is canonical. The old ".opencode/rules/*.md" glob matched no
+  // files and was dead config.
+  "instructions": ["AGENTS.md"],
+
+  // ---------- Skills ----------
+  // Registers the vendored Neon/Postgres skills, which live in a project-local
+  // .agents/skills and were NOT being auto-loaded before.
+  "skills": {
+    "paths": [".agents/skills"]
+  },
+
+  // ---------- Context and token control ----------
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "tail_turns": 15
+  },
+
+  "tool_output": {
+    "max_lines": 2000,
+    "max_bytes": 65536
+  },
+
+  "watcher": {
+    "ignore": [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      ".next/**",
+      ".git/**",
+      "coverage/**",
+      "*.lock",
+      "*.min.js",
+      "*.map",
+      // 17MB of TTF fonts under lib/ — never worth watching.
+      "lib/**/*.ttf",
+      "public/**"
+    ]
+  },
+
+  // ---------- MCP servers ----------
+  // context7 is auto-registered by oh-my-openagent, so it is not redeclared here.
+  "mcp": {
+    "seqthinking": {
+      "type": "local",
+      "command": ["npx", "-y", "sequential-thinking-mcp"],
+      "enabled": true
+    },
+    "codegraph": {
+      "type": "local",
+      // Absolute path: valid on this machine only. Swap for a relative or
+      // npx-based command if the repo is used elsewhere.
+      "command": [
+        "node",
+        "/home/prs/.local/node_modules/@astudioplus/codegraph-mcp/bin/codegraph-mcp.js"
+      ],
+      "enabled": true
+    }
+  },
+
+  // ---------- Permissions ----------
+  // Ordered: opencode evaluates the LAST matching rule, so narrow rules last.
+  "permission": {
+    "edit": "ask",
+    "webfetch": "ask",
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "ls*": "allow",
+      "cat *": "allow",
+      "grep *": "allow",
+      "rg *": "allow",
+      "npm test*": "allow",
+      "npm run lint*": "allow",
+      "npm run typecheck*": "allow",
+      "npm run build*": "allow",
+      "npm run dev*": "allow",
+      "npm install*": "allow",
+      "npm ci*": "allow",
+      "git push*": "allow",
+      "rm -rf*": "deny"
+    }
+  },
+
+  // ---------- Formatters ----------
+  "formatter": {
+    "prettier": {
+      "command": ["npx", "prettier", "--write", "$FILE"],
+      "extensions": [".js", ".jsx", ".ts", ".tsx", ".vue", ".json", ".css", ".md"]
+    }
+  }
+}

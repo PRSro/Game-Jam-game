@@ -1,0 +1,11 @@
+[
+  {
+    "question": "Should Calea Victoriei be pedestrian on Sundays? (Demo)",
+    "description": "DEMO DATA - Placeholder civic poll",
+    "communityType": "sector",
+    "communityName": "Sector 3",
+    "startsAt": "2026-10-01T00:00:00.000Z",
+    "endsAt": "2026-10-31T23:59:00.000Z",
+    "options": [{"option": "Yes"}, {"option": "No"}]
+  }
+]

@@ -1,0 +1,37 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.*
+
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+.vercel
+
+# oh-my-opencode tooling state
+# Transient local state is ignored; plans/, drafts/ and omo.jsonc stay tracked
+# because the tool resolves those paths from the project root.
+.omo/migration-backup-*/
+.omo/run-continuation/
+.omo/notepads/
+.omo/*.bak.*

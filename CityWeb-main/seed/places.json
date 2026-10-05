@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Piața Universității",
+    "venueName": "Piața Universității",
+    "address": "Bucharest, Romania",
+    "neighborhood": "Centru",
+    "sector": "3",
+    "latitude": 44.4355,
+    "longitude": 26.1025,
+    "tags": ["square", "meeting"]
+  },
+  {
+    "name": "Floreasca Park Area",
+    "venueName": "Parcul Floreasca",
+    "address": "Bucharest, Romania",
+    "neighborhood": "Floreasca",
+    "sector": "2",
+    "latitude": 44.4667,
+    "longitude": 26.1036,
+    "tags": ["park", "outdoor"]
+  }
+]

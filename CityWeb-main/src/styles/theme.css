@@ -1,0 +1,116 @@
+/* Piața — raw palette and scale.
+ *
+ * Every colour below has a real Bucharest source; the source is named inline
+ * because that provenance is the point, not decoration. Values are pigments and
+ * never change with theme — only the semantic aliases in globals.css flip.
+ */
+
+@theme {
+  /* FAȚADĂ — light base: Belle Époque and interbellic stucco, limestone,
+     painted shutters. */
+  --calcar: #ede4d0; /* limestone — CEC Palace, Ateneu-era facades */
+  --ocru: #c8923a; /* faded ochre stucco — fills and borders only, never text */
+  --teracota: #a8472e; /* roof tile — primary action, links */
+  --oblon: #4a6652; /* shutter green — secondary accent, success */
+  --piatra: #8c877d; /* cobblestone — dividers, borders, disabled; never text */
+  --cerneala: #26231f; /* warm ink — all body text */
+  --roz: #d8a898; /* dusty pink villa walls — small accent only */
+
+  /* LINII — Metrorex line colours carrying content type. Category markers
+     only: tags, left stripes, map pins, chart series. Never a page or large
+     area background. Never white text on yellow or orange. */
+  --linie-evenimente: #f2c200; /* ink on top */
+  --linie-joburi: #0b5ca8; /* white on top */
+  --linie-trafic: #d6182b; /* white on top */
+  --linie-oameni: #0b7a41; /* white on top */
+  --linie-sondaje: #f28a1e; /* ink on top */
+
+  /* Text sitting ON a category fill. The spec's own table prescribes white on
+     the three deep lines, and warm calcar on those drops to 4.13 (red) and
+     4.29 (green) — below the 4.5 body minimum. White reaches 5.2-6.6, so the
+     pure-white ban yields here: it governs body copy and page backgrounds,
+     not text on a saturated category chip. */
+  --linie-on-intens: #ffffff; /* on joburi / trafic / oameni */
+  --linie-on-clar: var(--cerneala); /* on evenimente / sondaje */
+
+  /* SEARĂ — dark: sodium streetlights, linden trees, the Dâmbovița. */
+  --amurg: #1c2230; /* dusk — page background */
+  --sodiu: #e59b2f; /* sodium lamp — primary accent, replaces terracotta */
+  --tei: #a9b565; /* linden — secondary accent */
+  --hartie: #eae3d3; /* paper — all body text */
+  --apa: #55645e; /* river — dividers and illustration; never text */
+
+  /* Type. Display face only above the subheading step — never for paragraphs.
+     Bodoni Moda stands in for Playfair Display; both are high-contrast Didone. */
+  --font-display: 'Bodoni Moda', 'Playfair Display', ui-serif, Georgia, serif;
+  --font-body: 'Lora', 'Source Serif 4', ui-serif, Georgia, serif;
+  --font-ui: 'Inter', 'Work Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* 1.250 modular scale from a 17px body. */
+  --text-caption: 13px;
+  --text-caption--line-height: 1.5;
+  --text-body: 17px;
+  --text-body--line-height: 1.6;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.6;
+  --text-subheading: 21px;
+  --text-subheading--line-height: 1.4;
+  --text-heading-sm: 26px;
+  --text-heading-sm--line-height: 1.25;
+  --text-heading: 33px;
+  --text-heading--line-height: 1.15;
+  --text-heading-lg: 41px;
+  --text-heading-lg--line-height: 1.15;
+  --text-display: 52px;
+  --text-display--line-height: 1.15;
+
+  /* Shape: enamel sign and stone plaque. 2px or 4px — nothing between.
+     `full` is for radio and switch controls only, never for containers. */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --radius-full: 10000px;
+
+  /* Motion: colour and transform only, 150-200ms ease-out. Durations are not a
+     Tailwind theme namespace, so the scale is expressed as bare duration-*
+     utilities: 150 fast, 200 base, 300 slow. */
+  --default-transition-duration: 150ms;
+  --default-transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  --ease-standard: cubic-bezier(0, 0, 0.2, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* No shadow scale by design. Elevation is a single 1px border or nothing —
+     never a blurred drop shadow. */
+}
+
+@layer base {
+  /* Category left stripe, 3-4px, like a metro line on a station wall. */
+  .stripe-evenimente {
+    border-left: 4px solid var(--linie-evenimente);
+  }
+  .stripe-joburi {
+    border-left: 4px solid var(--linie-joburi);
+  }
+  .stripe-trafic {
+    border-left: 4px solid var(--linie-trafic);
+  }
+  .stripe-oameni {
+    border-left: 4px solid var(--linie-oameni);
+  }
+  .stripe-sondaje {
+    border-left: 4px solid var(--linie-sondaje);
+  }
+
+  /* Section divider: 1px rule, 3px gap, 1px rule. Two borders rather than a
+     zero-blur box-shadow, so the "no shadows" rule survives a grep. */
+  .rule-double {
+    border-block: 1px solid var(--border);
+    padding-block: 3px;
+  }
+
+  /* Optional static stone grain on --bg only. SVG turbulence, not a gradient,
+     no animation. Opt-in: leave it off where paint cost matters. */
+  .texture-stone {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "reason": "Road maintenance - demo placeholder",
+    "routeType": "street",
+    "street": "Calea Victoriei",
+    "sector": "3",
+    "startDate": "2026-10-08T00:00:00.000Z",
+    "endDate": "2026-10-09T23:59:00.000Z",
+    "source": "Demo data",
+    "unverified": true
+  }
+]
